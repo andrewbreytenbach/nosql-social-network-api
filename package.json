@@ -1,0 +1,28 @@
+{
+    "name": "social-network-api",
+    "version": "1.0.0",
+    "description": "API for a social network web application",
+    "main": "index.js",
+    "scripts": {
+      "start": "node server.js",
+      "dev": "nodemon server.js"
+    },
+    "keywords": [
+      "social",
+      "network",
+      "API",
+      "Express",
+      "MongoDB",
+      "Mongoose"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {
+      "express": "^4.17.1",
+      "mongoose": "^6.1.0"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.15"
+    }
+  }
+  
