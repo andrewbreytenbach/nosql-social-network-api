@@ -1,22 +1,23 @@
 const mongoose = require('mongoose');
 
-// Establish connection to the MongoDB database
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-network-api', {
-  useNewUrlParser: true,         // Parse connection string using new URL parser
-  useUnifiedTopology: true,    // Use new Server Discover and Monitoring engine
-  useCreateIndex: true,        // Ensure indexes are created for schema-defined indexes
-  useFindAndModify: false      // Disable deprecated findOneAndUpdate() and findOneAndRemove() methods
+// Connect to MongoDB using the provided connection URL
+mongoose.connect('mongodb://localhost:27017/social-network-api', {
+  useNewUrlParser: true,          // Use the new URL parser
+  useUnifiedTopology: true       // Use the new Server Discover and Monitoring engine
 });
 
-// Event listener for successful connection
-mongoose.connection.on('connected', () => {
-  console.log('Connected to the social network API database');
+// Get the default connection object from Mongoose
+const connection = mongoose.connection;
+
+// Event handler for successful connection
+connection.on('connected', () => {
+  console.log('Connected to MongoDB');
 });
 
-// Event listener for connection errors
-mongoose.connection.on('error', (err) => {
-  console.error('Error connecting to the social network API database:', err);
+// Event handler for connection errors
+connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
 });
 
-// Export the database connection
-module.exports = mongoose.connection;
+// Export the connection object
+module.exports = connection;
