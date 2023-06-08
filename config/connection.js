@@ -1,23 +1,10 @@
-const mongoose = require('mongoose');
+const { connect, connection } = require('mongoose');
+
 
 // Connect to MongoDB using the provided connection URL
-mongoose.connect('mongodb://localhost:27017/social-network-api', {
-  useNewUrlParser: true,          // Use the new URL parser
-  useUnifiedTopology: true       // Use the new Server Discover and Monitoring engine
-});
+const connectionString =
+  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/social-network-api';
 
-// Get the default connection object from Mongoose
-const connection = mongoose.connection;
+  connect(connectionString);
 
-// Event handler for successful connection
-connection.on('connected', () => {
-  console.log('Connected to MongoDB');
-});
-
-// Event handler for connection errors
-connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
-});
-
-// Export the connection object
 module.exports = connection;
