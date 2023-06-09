@@ -23,19 +23,17 @@ The API provides the following endpoints:
 
 /api/users: CRUD operations for users.
 
-Login Page Screenshot: ![](./public/images/login.png)
+Login Page Screenshot: ![](./image-3.png)
 
 /api/thoughts: CRUD operations for thoughts.
 
-Homepage Screenshot: ![](./public/images/homepage.png)
-
 /api/users/:userId/friends/:friendId: Add and remove friends for a user.
 
-Homepage Screenshot: ![](./public/images/homepage.png)
+Homepage Screenshot: ![](./image-2.png)
 
 /api/thoughts/:thoughtId/reactions: Add and remove reactions to a thought.
 
-Homepage Screenshot: ![](./public/images/homepage.png)
+Homepage Screenshot: ![] (./image-2.png)
 
 To test the API, you can use tools like Postman or Insomnia to send HTTP requests to the appropriate endpoints.
 
