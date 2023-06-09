@@ -3,13 +3,19 @@ const { Schema, model } = require('mongoose');
 // Schema to create User model
 const userSchema = new Schema(
   {
-    first: String,
-    last: String,
+    firstName: String, // Update the property name to 'firstName'
+    lastName: String, // Update the property name to 'lastName'
     age: Number,
     applications: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Application',
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
       },
     ],
   },
@@ -28,16 +34,16 @@ userSchema
   .virtual('fullName')
   // Getter
   .get(function () {
-    return `${this.first} ${this.last}`;
+    return `${this.firstName} ${this.lastName}`;
   })
   // Setter to set the first and last name
   .set(function (v) {
-    const first = v.split(' ')[0];
-    const last = v.split(' ')[1];
-    this.set({ first, last });
+    const [firstName, lastName] = v.split(' ');
+    this.firstName = firstName;
+    this.lastName = lastName;
   });
 
 // Initialize our User model
-const User = model('user', userSchema);
+const User = model('User', userSchema); // Update the model name to 'User'
 
 module.exports = User;

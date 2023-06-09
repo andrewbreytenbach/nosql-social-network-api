@@ -18,16 +18,15 @@ connection.once('open', async () => {
     const last = fullName.split(' ')[1];
 
     users.push({
-      first,
-      last,
+      firstName: first, // Modify the property name to match your User model schema
+      lastName: last, // Modify the property name to match your User model schema
       age: Math.floor(Math.random() * (99 - 18 + 1) + 18),
     });
   }
 
-  await User.collection.insertMany(users);
-  await Application.collection.insertMany(applications);
+  await User.insertMany(users); // Use insertMany() instead of collection.insertMany()
+  await Application.insertMany(applications); // Use insertMany() instead of collection.insertMany()
 
-  // loop through the saved applications, for each application we need to generate a application response and insert the application responses
   console.table(users);
   console.table(applications);
   console.info('Seeding complete! 🌱');
