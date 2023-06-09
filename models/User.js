@@ -6,7 +6,7 @@ const userSchema = new Schema(
     firstName: String, // Update the property name to 'firstName'
     lastName: String, // Update the property name to 'lastName'
     age: Number,
-    applications: [
+    thoughts: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Application',
