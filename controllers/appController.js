@@ -1,6 +1,7 @@
 const { Application, User } = require('../models');
 
 module.exports = {
+  // Get all applications
   async getApplications(req, res) {
     try {
       const applications = await Application.find();
@@ -9,6 +10,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  // Get a single application by ID
   async getSingleApplication(req, res) {
     try {
       const application = await Application.findOne({ _id: req.params.applicationId });
@@ -22,7 +25,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the createApplication method
+
+  // Create a new application
   async createApplication(req, res) {
     try {
       const application = await Application.create(req.body);
@@ -44,7 +48,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the updateApplication method
+
+  // Update an application by ID
   async updateApplication(req, res) {
     try {
       const application = await Application.findOneAndUpdate(
@@ -54,7 +59,7 @@ module.exports = {
       );
 
       if (!application) {
-        return res.status(404).json({ message: 'No application with this id!' });
+        return res.status(404).json({ message: 'No application with this ID' });
       }
 
       res.json(application);
@@ -63,13 +68,14 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the deleteApplication method
+
+  // Delete an application by ID
   async deleteApplication(req, res) {
     try {
       const application = await Application.findOneAndRemove({ _id: req.params.applicationId });
 
       if (!application) {
-        return res.status(404).json({ message: 'No application with this id!' });
+        return res.status(404).json({ message: 'No application with this ID' });
       }
 
       const user = await User.findOneAndUpdate(
@@ -80,7 +86,7 @@ module.exports = {
 
       if (!user) {
         return res.status(404).json({
-          message: 'Application created but no user with this id!',
+          message: 'Application created but no user with this ID',
         });
       }
 
@@ -89,7 +95,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the addTag method
+
+  // Add a tag to an application
   async addTag(req, res) {
     try {
       const application = await Application.findOneAndUpdate(
@@ -99,7 +106,7 @@ module.exports = {
       );
 
       if (!application) {
-        return res.status(404).json({ message: 'No application with this id!' });
+        return res.status(404).json({ message: 'No application with this ID' });
       }
 
       res.json(application);
@@ -107,7 +114,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the addTag method
+
+  // Remove a tag from an application
   async removeTag(req, res) {
     try {
       const application = await Application.findOneAndUpdate(
@@ -117,7 +125,7 @@ module.exports = {
       );
 
       if (!application) {
-        return res.status(404).json({ message: 'No application with this id!' });
+        return res.status(404).json({ message: 'No application with this ID' });
       }
 
       res.json(application);
