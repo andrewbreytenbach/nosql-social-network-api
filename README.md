@@ -33,8 +33,6 @@ Homepage Screenshot: ![](./image-1.png)
 
 /api/thoughts/:thoughtId/reactions: Add and remove reactions to a thought.
 
-Homepage Screenshot: ![] (./image-2.png)
-
 To test the API, you can use tools like Postman or Insomnia to send HTTP requests to the appropriate endpoints.
 
 (Check out this link for a full video walkthrough:)
