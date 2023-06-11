@@ -29,9 +29,9 @@ module.exports = {
   // Create a new thought
   async createThought(req, res) {
     try {
-      // Logic for creating a new thought
+      const thought = await Thought.create(req.body);
+      res.json(thought);
     } catch (err) {
-      console.log(err);
       res.status(500).json(err);
     }
   },
@@ -39,9 +39,18 @@ module.exports = {
   // Update a thought by ID
   async updateThought(req, res) {
     try {
-      // Logic for updating a thought
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      );
+
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with this ID' });
+      }
+
+      res.json(thought);
     } catch (err) {
-      console.log(err);
       res.status(500).json(err);
     }
   },
@@ -49,25 +58,13 @@ module.exports = {
   // Delete a thought by ID
   async deleteThought(req, res) {
     try {
-      // Logic for deleting a thought
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  },
+      const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
 
-  // Add a tag to a thought
-  async addTag(req, res) {
-    try {
-      // Logic for adding a tag to a thought
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  },
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with this ID' });
+      }
 
-  // Remove a tag from a thought
-  async removeTag(req, res) {
-    try {
-      // Logic for removing a tag from a thought
+      res.json({ message: 'Thought successfully deleted!' });
     } catch (err) {
       res.status(500).json(err);
     }

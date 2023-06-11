@@ -1,50 +1,56 @@
 const { Schema, model } = require('mongoose');
 
-
-// Schema to create Application model
-const applicationSchema = new Schema(
+const thoughtSchema = new Schema(
   {
-    published: {
-      type: Boolean,
-      default: false,
+    thoughtText: {
+      type: String,
+      required: true,
+      minlength: 1,
+      maxlength: 280,
     },
     createdAt: {
       type: Date,
       default: Date.now,
     },
-    buildSuccess: {
-      type: Boolean,
-      default: true,
-    },
-    description: {
+    username: {
       type: String,
-      minlength: 15, // Update to 'minlength' (all lowercase)
-      maxlength: 500, // Update to 'maxlength' (all lowercase)
+      required: true,
     },
-    tags: [
+    reactions: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'Tag', // Update the reference to 'Tag' model
+        reactionId: {
+          type: Schema.Types.ObjectId,
+          default: () => new Types.ObjectId(),
+        },
+        reactionBody: {
+          type: String,
+          required: true,
+          maxlength: 280,
+        },
+        username: {
+          type: String,
+          required: true,
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
     ],
   },
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
 );
 
-// Create a virtual property `tagCount` that gets the amount of tags associated with an application
-applicationSchema
-  .virtual('tagCount')
-  // Getter
-  .get(function () {
-    return this.tags.length;
-  });
+thoughtSchema.virtual('reactionCount').get(function () {
+  return this.reactions.length;
+});
 
-// Initialize our Application model
-const Application = model('Application', applicationSchema); // Update the model name to 'Application'
+const Thought = model('Thought', thoughtSchema);
 
-module.exports = Application;
+module.exports = Thought;
