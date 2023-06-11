@@ -35,8 +35,8 @@ Homepage Screenshot: ![](./image-1.png)
 
 To test the API, you can use tools like Postman or Insomnia to send HTTP requests to the appropriate endpoints.
 
-(Check out this link for a full video walkthrough:)
-[https://expressjs.com/] 
+Check out this link for a full video walkthrough:
+[https://drive.google.com/file/d/1qRL5slVJ4kH8RxzdxBVNAEvDUZvNwTpV/view] 
 
 ## API Documentation
 For detailed information about the API endpoints and request/response formats, please refer to the API documentation available in the API Documentation file.
