@@ -43,6 +43,11 @@ userSchema
     this.lastName = lastName;
   });
 
+// Create a virtual property `friendCount` that returns the number of friends
+userSchema.virtual('friendCount').get(function () {
+  return this.friends.length;
+});
+
 // Initialize our User model
 const User = model('User', userSchema); // Update the model name to 'User'
 
