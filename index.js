@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -12,8 +12,6 @@ app.use(routes);
 mongoose.connect('mongodb://localhost/social-network-api', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  createIndexes: true,
-  findOneAndUpdate: false,
 });
 
 const db = mongoose.connection;

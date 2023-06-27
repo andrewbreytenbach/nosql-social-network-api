@@ -14,8 +14,7 @@ module.exports = {
   // Get a single user by ID
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId })
-        .select('-__v');
+      const user = await User.findOne({ _id: req.params.userId }).select('-__v');
 
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' });
@@ -37,6 +36,25 @@ module.exports = {
     }
   },
 
+  // Update a user by ID
+  async updateUser(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        req.body,
+        { new: true }
+      );
+
+      if (!user) {
+        return res.status(404).json({ message: 'No user with that ID' });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
   // Delete a user and associated applications
   async deleteUser(req, res) {
     try {
@@ -47,7 +65,7 @@ module.exports = {
       }
 
       await Application.deleteMany({ _id: { $in: user.applications } });
-      res.json({ message: 'User and associated applications deleted!' })
+      res.json({ message: 'User and associated applications deleted!' });
     } catch (err) {
       res.status(500).json(err);
     }
